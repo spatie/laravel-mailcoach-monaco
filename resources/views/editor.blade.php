@@ -15,6 +15,10 @@
             require.config({ paths: { 'vs': '{{ asset('vendor/mailcoach/monaco/vs') }}' }});
 
             require(['vs/editor/editor.main'], function() {
+                if (window.editor) {
+                    window.editor.dispose();
+                }
+
                 window.editor = monaco.editor.create(container, {
                     value: JSON.parse('{!! addslashes(json_encode(explode("\n", old('html', $html)))) !!}').join('\n'),
                     language: 'html',
