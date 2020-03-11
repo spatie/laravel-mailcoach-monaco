@@ -2,6 +2,10 @@
     <script src="{{ asset('vendor/mailcoach/monaco/vs/loader.js') }}"></script>
     <script>
         document.addEventListener('turbolinks:load', function() {
+            if (window.require === undefined) {
+                location.reload();
+            }
+
             const container = document.getElementById('monaco-container');
 
             if (! container) {
