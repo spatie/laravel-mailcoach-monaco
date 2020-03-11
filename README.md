@@ -20,6 +20,16 @@ You must publish the JavaScript and CSS assets using this command:
 php artisan vendor:publish --tag mailcoach-monaco-assets --force
 ```
 
+Every time the package is updated you'll need to run that command. You can automate this by adding it to your `post-update-cmd` script in `composer.json`.
+
+```
+"scripts": {
+    "post-update-cmd": [
+        "@php artisan vendor:publish --tag mailcoach-monaco-assets --force"
+    ]
+}
+```
+
 ## Usage
 
 Set the `mailcoach.editor` config value to `\Spatie\MailcoachMonaco\MonacoEditor::class`
