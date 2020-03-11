@@ -33,6 +33,7 @@ You can change some Monaco editor options by adding a `monaco` configuration key
     'theme' => 'vs-light', // vs-light or vs-dark
     'fontFamily' => 'Jetbrains Mono',
     'fontLigatures' => true,
+    'fontWeight' => 400,
     'fontSize' => '16', // No units
     'lineHeight' => '24' // No units
 ],
