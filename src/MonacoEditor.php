@@ -4,7 +4,6 @@ namespace Spatie\MailcoachMonaco;
 
 use Spatie\Mailcoach\Models\Concerns\HasHtmlContent;
 use Spatie\Mailcoach\Support\Editor\Editor;
-use Spatie\Mailcoach\Support\Replacers\ReplacerWithHelpText;
 
 class MonacoEditor implements Editor
 {
