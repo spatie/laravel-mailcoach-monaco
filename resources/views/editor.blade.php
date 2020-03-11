@@ -2,23 +2,20 @@
     <script src="{{ asset('vendor/mailcoach/monaco/vs/loader.js') }}"></script>
     <script>
         document.addEventListener('turbolinks:load', function() {
-            if (window.require === undefined) {
-                location.reload();
-            }
-
             const container = document.getElementById('monaco-container');
 
             if (! container) {
                 return;
             }
 
+            if (window.require === undefined || window.editor) {
+                location.reload();
+                return;
+            }
+
             require.config({ paths: { 'vs': '{{ asset('vendor/mailcoach/monaco/vs') }}' }});
 
             require(['vs/editor/editor.main'], function() {
-                if (window.editor) {
-                    window.editor.dispose();
-                }
-
                 window.editor = monaco.editor.create(container, {
                     value: JSON.parse('{!! addslashes(json_encode(explode("\n", old('html', $html)))) !!}').join('\n'),
                     language: 'html',
