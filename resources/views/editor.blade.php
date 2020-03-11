@@ -23,7 +23,12 @@
                         enabled: false
                     },
                     fixedOverflowWidgets: {},
-                    theme: '{{ config('mailcoach.monaco.theme', 'vs-light') }}'
+                    theme: '{!! config('mailcoach.monaco.theme', 'vs-light') !!}',
+                    fontFamily: '{!! config('mailcoach.monaco.fontFamily', 'Menlo, Monaco, "Courier New", monospace') !!}',
+                    fontSize: '{!! config('mailcoach.monaco.fontSize', '12') !!}',
+                    fontWeight: '{!! config('mailcoach.monaco.fontWeight', '400') !!}',
+                    fontLigatures: {!! config('mailcoach.monaco.fontLigatures', false) ? 'true' : 'false' !!},
+                    lineHeight: '{!! config('mailcoach.monaco.lineHeight', '18') !!}',
                 });
 
                 document.getElementById('save').addEventListener('click', event => {

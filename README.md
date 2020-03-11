@@ -24,16 +24,18 @@ php artisan vendor:publish --tag mailcoach-monaco-assets --force
 
 Set the `mailcoach.editor` config value to `\Spatie\MailcoachMonaco\MonacoEditor::class`
 
-### Theme option
+### Options
 
-You can set the Monaco theme to either a light (default) or a dark theme, you can do this by adding a `mailcoach.monaco.theme` key to your `mailcoach.php` config file.
-
-Available options: `vs-light`, `vs-dark`
+You can change some Monaco editor options by adding a `monaco` configuration key to your `mailcoach.php` config file.
 
 ```php
 'monaco' => [
-    'theme' => 'vs-light'
-]
+    'theme' => 'vs-light', // vs-light or vs-dark
+    'fontFamily' => 'Jetbrains Mono',
+    'fontLigatures' => true,
+    'fontSize' => '16', // No units
+    'lineHeight' => '24' // No units
+],
 ```
 
 ## Changelog
