@@ -36,6 +36,15 @@
                     document.getElementById('html').value = window.editor.getValue();
                     document.querySelector('.layout-main form').submit();
                 });
+
+                document.getElementById('preview').addEventListener('click', event => {
+                    event.preventDefault();
+                    document.getElementById('html').value = window.editor.getValue();
+                    const input = document.createEvent('Event');
+                    input.initEvent('input', true, true);
+                    document.getElementById('html').dispatchEvent(input);
+                    showModal('preview');
+                });
             });
         });
     </script>
@@ -53,7 +62,7 @@
         <x-icon-label icon="fa-code" text="Save content"/>
     </button>
 
-    <button type="button" class="link-icon" data-modal-trigger="preview">
+    <button id="preview" type="button" class="link-icon" data-modal-trigger="preview">
         <x-icon-label icon="fa-eye" text="Preview"/>
     </button>
     <x-modal title="Preview" name="preview" large>
