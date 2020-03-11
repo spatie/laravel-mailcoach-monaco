@@ -69,3 +69,6 @@
         <iframe class="absolute" width="100%" height="100%" data-html-preview-target></iframe>
     </x-modal>
 </div>
+
+<x-replacer-help-texts />
+
