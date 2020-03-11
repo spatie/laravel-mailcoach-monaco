@@ -41,6 +41,9 @@
     </script>
 @endpush
 <div>
+    @error('html')
+        <p class="form-error mb-2" role="alert">{{ $message }}</p>
+    @enderror
     <div id="monaco-container" style="position: relative;width:100%;height:700px;border:1px solid #ebf1f7"></div>
     <input type="hidden" id="html" name="html" value="{{ old('html', $html) }}" data-html-preview-source>
 </div>
