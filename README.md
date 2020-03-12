@@ -4,50 +4,9 @@ A Monaco editor package for Mailcoach
     
 ![](./docs/screenshot.png)
 
-## Installation
+## Documentation
 
-You can install the package via composer:
-
-```bash
-composer require spatie/laravel-mailcoach-monaco
-```
-
-### Publish the assets
-
-You must publish the JavaScript and CSS assets using this command:
-
-```bash
-php artisan vendor:publish --tag mailcoach-monaco-assets --force
-```
-
-Every time the package is updated you'll need to run that command. You can automate this by adding it to your `post-update-cmd` script in `composer.json`.
-
-```
-"scripts": {
-    "post-update-cmd": [
-        "@php artisan vendor:publish --tag mailcoach-monaco-assets --force"
-    ]
-}
-```
-
-## Usage
-
-Set the `mailcoach.editor` config value to `\Spatie\MailcoachMonaco\MonacoEditor::class`
-
-### Options
-
-You can change some Monaco editor options by adding a `monaco` configuration key to your `mailcoach.php` config file.
-
-```php
-'monaco' => [
-    'theme' => 'vs-light', // vs-light or vs-dark
-    'fontFamily' => 'Jetbrains Mono',
-    'fontLigatures' => true,
-    'fontWeight' => 400,
-    'fontSize' => '16', // No units
-    'lineHeight' => '24' // No units
-],
-```
+You'll find the documentation for this package [inside the Mailcoach docs](https://mailcoach.app/docs/v2/package/customizing-the-editor/monaco).
 
 ## Changelog
 
