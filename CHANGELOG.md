@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-mailcoach-monaco` will be documented in this file
 
+## 1.1.0 - 2020-06-10
+
+- Add translations (#1)
+
 ## 1.0.4 - 2020-03-11
 
 - Add help texts
