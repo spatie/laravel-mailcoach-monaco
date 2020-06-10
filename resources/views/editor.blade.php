@@ -59,11 +59,11 @@
 
 <div class="form-buttons">
     <button id="save" type="submit" class="button">
-        <x-icon-label icon="fa-code" text="Save content"/>
+        <x-icon-label icon="fa-code" :text="__('Save content')"/>
     </button>
 
     <button id="preview" type="button" class="link-icon" data-modal-trigger="preview">
-        <x-icon-label icon="fa-eye" text="Preview"/>
+        <x-icon-label icon="fa-eye" :text="__('Preview')"/>
     </button>
     <x-modal title="Preview" name="preview" large>
         <iframe class="absolute" width="100%" height="100%" data-html-preview-target></iframe>
