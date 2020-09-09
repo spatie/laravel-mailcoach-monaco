@@ -22,14 +22,14 @@
         "spatie/laravel-mailcoach": "^2.0"
     },
     "require-dev": {
-        "orchestra/testbench": "^5.0",
+        "orchestra/testbench": "^5.0|^6.0",
         "phpunit/phpunit": "^9.0",
         "symfony/var-dumper": "^5.0"
     },
     "repositories": [
         {
             "type": "composer",
-            "url": "https://satis.mailcoach.app"
+            "url": "https://satis.spatie.be"
         }
     ],
     "autoload": {

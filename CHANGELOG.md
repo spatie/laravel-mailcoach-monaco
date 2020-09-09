@@ -2,6 +2,11 @@
 
 All notable changes to `laravel-mailcoach-monaco` will be documented in this file
 
+## 1.1.1 - 2020-09-09
+
+- add support for Laravel 8
+- use spatie satis
+
 ## 1.1.0 - 2020-06-10
 
 - Add translations (#1)
