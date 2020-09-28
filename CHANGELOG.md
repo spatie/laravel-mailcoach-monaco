@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-mailcoach-monaco` will be documented in this file
 
+## 1.2.1 - 2020-09-28
+
+- Fix double replacer help texts
+
 ## 1.2.0 - 2020-09-24
 
 - Tag a Mailcoach v3 compatible release
