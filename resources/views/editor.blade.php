@@ -70,5 +70,3 @@
     </x-mailcoach::modal>
 </div>
 
-<x-mailcoach::replacer-help-texts />
-
