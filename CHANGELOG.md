@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-mailcoach-monaco` will be documented in this file
 
+## 1.3.0 - 2020-11-30
+
+- add support for PHP 8
+
 ## 1.2.1 - 2020-09-28
 
 - Fix double replacer help texts
