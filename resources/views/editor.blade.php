@@ -34,7 +34,7 @@
                 document.getElementById('save').addEventListener('click', event => {
                     event.preventDefault();
                     document.getElementById('html').value = window.editor.getValue();
-                    document.querySelector('.layout-main form').submit();
+                    document.querySelector('main form').submit();
                 });
 
                 document.getElementById('preview').addEventListener('click', event => {
