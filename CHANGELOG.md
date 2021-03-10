@@ -2,6 +2,11 @@
 
 All notable changes to `laravel-mailcoach-monaco` will be documented in this file
 
+## 2.0.0 - 2021-03-10
+
+- Mailcoach v4
+- Update the Monaco editor
+
 ## 1.3.0 - 2020-11-30
 
 - add support for PHP 8

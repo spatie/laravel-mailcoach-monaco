@@ -14,7 +14,7 @@ We highly appreciate you sending us a postcard from your hometown, mentioning wh
 
 ## Documentation
 
-You'll find the documentation for this package [inside the Mailcoach docs](https://mailcoach.app/docs/v2/package/customizing-the-editor/monaco).
+You'll find the documentation for this package [inside the Mailcoach docs](https://spatie.be/docs/laravel-mailcoach/v4/choosing-an-editor/monaco).
 
 ## Changelog
 
