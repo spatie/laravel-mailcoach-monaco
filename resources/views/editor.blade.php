@@ -58,13 +58,9 @@
 </div>
 
 <div class="form-buttons">
-    <button id="save" type="submit" class="button">
-        <x-mailcoach::icon-label icon="fa-code" :text="__('Save content')"/>
-    </button>
+    <x-mailcoach::button id="save" :label="__('Save content')"/>
+    <x-mailcoach::button-secondary data-modal-trigger="preview" :label="__('Preview')"/>
 
-    <button id="preview" type="button" class="link-icon" data-modal-trigger="preview">
-        <x-mailcoach::icon-label icon="fa-eye" :text="__('Preview')"/>
-    </button>
     <x-mailcoach::modal title="Preview" name="preview" large>
         <iframe class="absolute" width="100%" height="100%" data-html-preview-target></iframe>
     </x-mailcoach::modal>
