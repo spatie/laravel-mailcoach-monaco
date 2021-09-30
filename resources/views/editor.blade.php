@@ -15,6 +15,8 @@
 
             require.config({ paths: { 'vs': '{{ asset('vendor/mailcoach/monaco/vs') }}' }});
 
+            let contentChanged = false;
+
             require(['vs/editor/editor.main'], function() {
                 window.editor = monaco.editor.create(container, {
                     value: JSON.parse('{!! addslashes(json_encode(explode("\n", old('html', $html)))) !!}').join('\n'),
@@ -43,7 +45,23 @@
                     const input = document.createEvent('Event');
                     input.initEvent('input', true, true);
                     document.getElementById('html').dispatchEvent(input);
-                    showModal('preview');
+                });
+
+                window.editor.getModel().onDidChangeContent((event) => {
+                    contentChanged = true;
+                });
+
+                document.getElementById('send-test').addEventListener('click', event => {
+                    if (! contentChanged) {
+                        return;
+                    }
+
+                    event.stopPropagation();
+
+                    if (confirm('Make sure you save any changes to the content first.')) {
+                        contentChanged = false;
+                        event.target.click();
+                    }
                 });
             });
         });
@@ -60,6 +78,6 @@
 <div class="form-buttons">
     <x-mailcoach::button id="save" :label="__('Save content')"/>
     <x-mailcoach::button-secondary id="preview" data-modal-trigger="preview" :label="__('Preview')"/>
-    <x-mailcoach::button-secondary data-modal-trigger="send-test" :label="__('Send Test')"/>
+    <x-mailcoach::button-secondary id="send-test" data-modal-trigger="send-test" :label="__('Send Test')"/>
 </div>
 
