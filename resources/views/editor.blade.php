@@ -78,6 +78,8 @@
 <div class="form-buttons">
     <x-mailcoach::button id="save" :label="__('Save content')"/>
     <x-mailcoach::button-secondary id="preview" data-modal-trigger="preview" :label="__('Preview')"/>
-    <x-mailcoach::button-secondary id="send-test" data-modal-trigger="send-test" :label="__('Send Test')"/>
+    @if ($showTestButton)
+        <x-mailcoach::button-secondary id="send-test" data-modal-trigger="send-test" :label="__('Send Test')"/>
+    @endif
 </div>
 
