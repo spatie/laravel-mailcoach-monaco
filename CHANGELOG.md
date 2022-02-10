@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-mailcoach-monaco` will be documented in this file
 
+## 2.0.3 - 2022-02-03
+
+- Only show "Send test" button when it's possible to send a test
+
 ## 2.0.2 - 2021-09-30
 
 - Warn to save changes before sending a test
