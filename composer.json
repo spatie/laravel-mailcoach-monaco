@@ -19,7 +19,7 @@
     "require": {
         "php": "^8.0",
         "ext-json": "*",
-        "spatie/laravel-mailcoach": "^5.0"
+        "spatie/laravel-mailcoach": "^5.2"
     },
     "require-dev": {
         "orchestra/testbench": "^7.0",

@@ -1,7 +1,7 @@
 @push('endHead')
     <script src="{{ asset('vendor/mailcoach/monaco/vs/loader.js') }}"></script>
     <script>
-        document.addEventListener('turbolinks:load', function() {
+        document.addEventListener('turbo:load', function() {
             const container = document.getElementById('monaco-container');
 
             if (! container) {
