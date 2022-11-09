@@ -17,9 +17,9 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "php": "^8.0",
+        "php": "^8.1",
         "ext-json": "*",
-        "spatie/laravel-mailcoach": "^5.2"
+        "spatie/laravel-mailcoach": "^6.0"
     },
     "require-dev": {
         "orchestra/testbench": "^7.0",
