@@ -1,85 +1,81 @@
-@push('endHead')
-    <script src="{{ asset('vendor/mailcoach/monaco/vs/loader.js') }}"></script>
+<div class="form-grid">
     <script>
-        document.addEventListener('turbo:load', function() {
-            const container = document.getElementById('monaco-container');
+        function debounce(func, timeout = 300){
+            let timer;
+            return (...args) => {
+                clearTimeout(timer);
+                timer = setTimeout(() => { func.apply(this, args); }, timeout);
+            };
+        }
 
-            if (! container) {
-                return;
+        window.init = function () {
+            require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.21.2/min/vs' }});
+
+            window.MonacoEnvironment = {
+                getWorkerUrl: function (workerId, label) {
+                    return `data:text/javascript;charset=utf-8,${encodeURIComponent(`
+                          self.MonacoEnvironment = {
+                            baseUrl: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.21.2/min/'
+                          };
+                          importScripts('https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.21.2/min/vs/base/worker/workerMain.js');`
+                    )}`
+                }
             }
 
-            if (window.require === undefined || window.editor) {
-                location.reload();
-                return;
+            const component = this;
+
+            require(['vs/editor/editor.main'], () => initializeMonaco());
+
+            function initializeMonaco() {
+                monaco.editor.getModels().forEach(model => model.dispose());
+
+                component.$nextTick(() => {
+                    let editor = monaco.editor.create(component.$refs.editor, {
+                        value: component.value.html || component.value,
+                        language: 'html',
+                        minimap: {
+                            enabled: false
+                        },
+                        fixedOverflowWidgets: {},
+                        theme: '{!! config('mailcoach-monaco.theme', 'vs-light') !!}',
+                        fontSize: '{!! config('mailcoach-monaco.fontSize', '12') !!}',
+                        fontWeight: '{!! config('mailcoach-monaco.fontWeight', '400') !!}',
+                        fontLigatures: {!! config('mailcoach-monaco.fontLigatures', false) ? 'true' : 'false' !!},
+                        lineHeight: '{!! config('mailcoach-monaco.lineHeight', '18') !!}',
+                        scrollbar: {
+                            alwaysConsumeMouseWheel: false,
+                        }
+                    });
+
+                    editor.getModel().onDidChangeContent(debounce(() => {
+                        component.$refs.editor.dirty = true;
+                        component.value = editor.getValue();
+                    }));
+                });
+
             }
-
-            require.config({ paths: { 'vs': '{{ asset('vendor/mailcoach/monaco/vs') }}' }});
-
-            let contentChanged = false;
-
-            require(['vs/editor/editor.main'], function() {
-                window.editor = monaco.editor.create(container, {
-                    value: JSON.parse('{!! addslashes(json_encode(explode("\n", old('html', $html)))) !!}').join('\n'),
-                    language: 'html',
-                    minimap: {
-                        enabled: false
-                    },
-                    fixedOverflowWidgets: {},
-                    theme: '{!! config('mailcoach.monaco.theme', 'vs-light') !!}',
-                    fontFamily: '{!! config('mailcoach.monaco.fontFamily', 'Menlo, Monaco, "Courier New", monospace') !!}',
-                    fontSize: '{!! config('mailcoach.monaco.fontSize', '12') !!}',
-                    fontWeight: '{!! config('mailcoach.monaco.fontWeight', '400') !!}',
-                    fontLigatures: {!! config('mailcoach.monaco.fontLigatures', false) ? 'true' : 'false' !!},
-                    lineHeight: '{!! config('mailcoach.monaco.lineHeight', '18') !!}',
-                });
-
-                document.getElementById('save').addEventListener('click', event => {
-                    event.preventDefault();
-                    document.getElementById('html').value = window.editor.getValue();
-                    document.querySelector('main form').submit();
-                });
-
-                document.getElementById('preview').addEventListener('click', event => {
-                    event.preventDefault();
-                    document.getElementById('html').value = window.editor.getValue();
-                    const input = document.createEvent('Event');
-                    input.initEvent('input', true, true);
-                    document.getElementById('html').dispatchEvent(input);
-                });
-
-                window.editor.getModel().onDidChangeContent((event) => {
-                    contentChanged = true;
-                });
-
-                document.getElementById('send-test').addEventListener('click', event => {
-                    if (! contentChanged) {
-                        return;
-                    }
-
-                    event.stopPropagation();
-
-                    if (confirm('Make sure you save any changes to the content first.')) {
-                        contentChanged = false;
-                        event.target.click();
-                    }
-                });
-            });
-        });
+        }
     </script>
-@endpush
-<div>
-    @error('html')
-        <p class="form-error mb-2" role="alert">{{ $message }}</p>
-    @enderror
-    <div id="monaco-container" style="position: relative;width:100%;height:700px;border:1px solid #ebf1f7"></div>
-    <input type="hidden" id="html" name="html" value="{{ old('html', $html) }}" data-html-preview-source>
-</div>
 
-<div class="form-buttons">
-    <x-mailcoach::button id="save" :label="__('Save content')"/>
-    <x-mailcoach::button-secondary id="preview" data-modal-trigger="preview" :label="__('Preview')"/>
-    @if ($showTestButton)
-        <x-mailcoach::button-secondary id="send-test" data-modal-trigger="send-test" :label="__('Send Test')"/>
+    @if ($model->hasTemplates())
+        <x-mailcoach::template-chooser />
     @endif
+
+    @foreach($template?->fields() ?? [['name' => 'html', 'type' => 'editor']] as $field)
+        <x-mailcoach::editor-fields :name="$field['name']" :type="$field['type']">
+            <x-slot name="editor">
+                <div wire:ignore x-data="{
+                    name: '{{ $field['name'] }}',
+                    value: @entangle('templateFieldValues.' . $field['name']),
+                    init: init,
+                }">
+                    <div x-ref="editor" class="input px-0 h-[700px]" data-dirty-check></div>
+                </div>
+            </x-slot>
+        </x-mailcoach::editor-fields>
+    @endforeach
+
+    <x-mailcoach::replacer-help-texts :model="$model" />
+    <x-mailcoach::editor-buttons :preview-html="$fullHtml" :model="$model" />
 </div>
 
