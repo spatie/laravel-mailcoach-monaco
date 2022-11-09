@@ -2,18 +2,13 @@
 
 namespace Spatie\MailcoachMonaco;
 
-use Spatie\Mailcoach\Domain\Campaign\Models\Concerns\HasHtmlContent;
-use Spatie\Mailcoach\Domain\Campaign\Models\Template;
-use Spatie\Mailcoach\Domain\Shared\Support\Editor\Editor;
-use Spatie\Mailcoach\Domain\TransactionalMail\Models\TransactionalMailTemplate;
+use Illuminate\Contracts\View\View;
+use Spatie\Mailcoach\Http\App\Livewire\EditorComponent;
 
-class MonacoEditor implements Editor
+class MonacoEditor extends EditorComponent
 {
-    public function render(HasHtmlContent $model): string
+    public function render(): View
     {
-        return view('mailcoach-monaco::editor', [
-            'html' => $model->getHtml(),
-            'showTestButton' => ! $model instanceof Template && ! $model instanceof TransactionalMailTemplate,
-        ])->render();
+        return view('mailcoach-monaco::editor');
     }
 }
